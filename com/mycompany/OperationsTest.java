@@ -1,4 +1,4 @@
-package com.mycompany.calculatorsmp;
+package com.mycompany;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import calculatorsmp.Operations;
 
 public class OperationsTest {
    public OperationsTest() {
@@ -91,7 +93,7 @@ public class OperationsTest {
       Assertions.assertEquals("5-10=-5", result);
    }
 
-   //JOHN
+   // JOHN
    @Test
    public void testSolveZeroResult() {
       String formula = "5+5-10";
@@ -147,4 +149,74 @@ public class OperationsTest {
       String result = Operations.Solve(formula);
       Assertions.assertEquals("-5-10=-15", result);
    }
+
+   @Test
+   public void testSolveComplexAdditionSubtraction() {
+      String formula = "5+10-3+7-10+2";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("5+10-3+7-10+2=11", result);
+   }
+
+   @Test
+   public void testSolveComplexNegativeNumbers() {
+      String formula = "-5+10-3-7+2";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("-5+10-3-7+2=-3", result);
+   }
+
+   @Test
+   public void testSolveSimpleMultiplication() {
+      String formula = "3*4";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("3*4=12", result);
+   }
+
+   @Test
+   public void testSolveMultipleMultiplications() {
+      String formula = "2*3*4";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("2*3*4=24", result);
+   }
+
+   @Test
+   public void testSolveSimpleDivision() {
+      String formula = "8/2";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("8/2=4", result);
+   }
+
+   @Test
+   public void testSolveMultipleDivisions() {
+      String formula = "24/2/2";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("24/2/2=6", result);
+   }
+
+   @Test
+   public void testSolveCombinedOperations() {
+      String formula = "10+2*6/3-4";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("10+2*6/3-4=10", result);
+   }
+
+   @Test
+   public void testSolveComplexCombinedOperations() {
+      String formula = "10+2*6-3/3+5*2";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("10+2*6-3/3+5*2=27", result);
+   }
+
+   @Test
+   public void testSolveDivisionByZero() {
+      String formula = "10/0";
+
+      try {
+         Operations.Solve(formula);
+         Assertions.fail("Expected ArithmeticException");
+      } catch (ArithmeticException var3) {
+         Assertions.assertTrue(true);
+      }
+
+   }
+
 }
