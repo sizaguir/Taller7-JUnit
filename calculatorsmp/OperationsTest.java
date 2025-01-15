@@ -90,3 +90,61 @@ public class OperationsTest {
       String result = Operations.Solve(formula);
       Assertions.assertEquals("5-10=-5", result);
    }
+
+   //JOHN
+   @Test
+   public void testSolveZeroResult() {
+      String formula = "5+5-10";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("5+5-10=0", result);
+   }
+
+   @Test
+   public void testSolveAdditionToZero() {
+      String formula = "0+5";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("0+5=5", result);
+   }
+
+   @Test
+   public void testSolveSubtractionToZero() {
+      String formula = "5-0";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("5-0=5", result);
+   }
+
+   @Test
+   public void testSolveLargeAddition() {
+      String formula = "1000000+2000000";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("1000000+2000000=3000000", result);
+   }
+
+   @Test
+   public void testSolveLargeSubtraction() {
+      String formula = "1000000-500000";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("1000000-500000=500000", result);
+   }
+
+   @Test
+   public void testSolveAdditionWithNegativeNumbers() {
+      String formula = "-5+10";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("-5+10=5", result);
+   }
+
+   @Test
+   public void testSolveSubtractionWithNegativeNumbers() {
+      String formula = "-10-5";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("-10-5=-15", result);
+   }
+
+   @Test
+   public void testSolveNegativeNumbersOnly() {
+      String formula = "-5-10";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("-5-10=-15", result);
+   }
+}
