@@ -41,5 +41,26 @@ public class OperationsTest {
         String esperado4 = "100/25=4";
         String resultado4 = Operations.Solve(formula);
         System.out.println("Resultadono esperado");
+        
     }
+
+    //Prueba 6: método Solve - fórmula que contiene múltiples operadores.
+    public void test5Solve() {
+        String formula = "10+20*3-5";
+        String esperado5 = "10+20*3-5=65";
+        String resultado5 = Operations.Solve(formula);
+        System.out.println("Resultadono esperado");
+
+    }
+    // Prueba 7: método Solve con una fórmula que contiene diferentes operadores.
+    public void test6Solve() {
+        String formula = "10+2-5";
+        String esperado6 = "10+2-5=7";
+        String resultado = Operations.Solve(formula);
+        System.out.println("Resultadono esperado");
+    }
+
+// Prueba Solve con una división que resulta en un número no entero.
+
+
 }
