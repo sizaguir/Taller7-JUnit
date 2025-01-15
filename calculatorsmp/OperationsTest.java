@@ -1,66 +1,92 @@
-package calculatorsmp;
+package com.mycompany.calculatorsmp;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class OperationsTest {
+   public OperationsTest() {
+   }
 
-    // Prueba 1: Verificacion del metodo MakeFormula() y el que genere una formula
-    // valida
-    public void testMakeFormula() {
-        String formula = Operations.MakeFormula();
-        System.out.println("Fórmula Generada: " + formula);
+   @BeforeAll
+   public static void setUpClass() {
+   }
 
-    }
+   @AfterAll
+   public static void tearDownClass() {
+   }
 
-    // Prueba2 :método Solve con una operación de suma simple.
-    public void test1Solve() {
-        String formula = "10+20";
-        String esperado1 = "10+20=30";
-        String resultado1 = Operations.Solve(formula);
-        System.out.println("Resultadono esperado");
-    }
+   @BeforeEach
+   public void setUp() {
+   }
 
-    // Prueba 3: método Solve con una operación de resta simple.
-    public void tes2tSolve() {
-        String formula = "50-15";
-        String esperado2 = "50-15=35";
-        String resultado2 = Operations.Solve(formula);
-        System.out.println("Resultadono esperado");
-    }
+   @AfterEach
+   public void tearDown() {
+   }
 
-    // Prueba 4:método Solve con una operación de multiplicación simple.
+   @Test
+   public void testMakeFormula() {
+      String formula = Operations.MakeFormula();
+      Assertions.assertNotNull(formula);
+      Assertions.assertFalse(formula.isEmpty());
+      Assertions.assertTrue(formula.matches("^\\d+(\\+|-|\\*|/)\\d+((\\+|-|\\*|/)\\d+)*$"));
+   }
 
-    public void test3Solve(){
-        String formula = "7*8";
-        String esperado3 = "7*8=56";
-        String resultado3 = Operations.Solve(formula);
-        System.out.println("Resultadono esperado");
-    }
+   @Test
+   public void testSolveAddition() {
+      String formula = "2+3";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("2+3=5", result);
+   }
 
-    // Prueba5:método Solve con una operación de división simple.
-    public void test4Solve() {
-        String formula = "100/25";
-        String esperado4 = "100/25=4";
-        String resultado4 = Operations.Solve(formula);
-        System.out.println("Resultadono esperado");
-        
-    }
+   @Test
+   public void testSolveMultipleAdditions() {
+      String formula = "2+3+4";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("2+3+4=9", result);
+   }
 
-    //Prueba 6: método Solve - fórmula que contiene múltiples operadores.
-    public void test5Solve() {
-        String formula = "10+20*3-5";
-        String esperado5 = "10+20*3-5=65";
-        String resultado5 = Operations.Solve(formula);
-        System.out.println("Resultadono esperado");
+   @Test
+   public void testSolveSimpleSubtraction() {
+      String formula = "10-5";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("10-5=5", result);
+   }
 
-    }
-    // Prueba 7: método Solve con una fórmula que contiene diferentes operadores.
-    public void test6Solve() {
-        String formula = "10+2-5";
-        String esperado6 = "10+2-5=7";
-        String resultado = Operations.Solve(formula);
-        System.out.println("Resultadono esperado");
-    }
+   @Test
+   public void testSolveMultipleSubtractions() {
+      String formula = "10-3-2";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("10-3-2=5", result);
+   }
 
-// Prueba Solve con una división que resulta en un número no entero.
+   @Test
+   public void testSolveAdditionAndSubtraction() {
+      String formula = "10+5-3";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("10+5-3=12", result);
+   }
 
+   @Test
+   public void testSolveSubtractionAndAddition() {
+      String formula = "10-5+3";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("10-5+3=8", result);
+   }
 
-}
+   @Test
+   public void testSolveMultipleOperations() {
+      String formula = "10+5-3+7-2";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("10+5-3+7-2=17", result);
+   }
+
+   @Test
+   public void testSolveNegativeResult() {
+      String formula = "5-10";
+      String result = Operations.Solve(formula);
+      Assertions.assertEquals("5-10=-5", result);
+   }
